@@ -69,15 +69,19 @@ public class BookmarkService
         return _bookmarks.ToList();
     }
 
-    public void Import(List<Bookmark> bookmarks)
+    public BookmarkConflictModel? Import(Bookmark bookmark)
     {
-        int count = 0;
-        foreach(var bookmark in bookmarks)
+        var conflict = _bookmarks.FirstOrDefault(b => b.Url == bookmark.Url && b.Name != bookmark.Name);
+        if(conflict is not null)
+        {
+            var conflictModel = new BookmarkConflictModel { OldName = conflict.Name, NewName = bookmark.Name, Url = bookmark.Url };
+            conflict.Name = bookmark.Name; // this updates the name of the bookmark.                               
+            return conflictModel;
+        }
+        else
         {
             _bookmarks.Add(bookmark);
-            count++;
-        }
-        
-        Helper.ShowSuccessMessage([$"Successfully imported {count} bookmarks!"]);
+            return null;
+        }        
     }
 }
