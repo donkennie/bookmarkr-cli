@@ -63,6 +63,7 @@ class Program
 
         /***** REGISTER SUBCOMMANDS OF THE ROOT COMMAND *******************/
         rootCommand.AddCommand(new ExportCommand(_service, "export", "Exports all bookmarks to a file"));
+        rootCommand.AddCommand(new SyncCommand(_serviceAgent, _service, "sync", "sync local and remote bookmark stores"));
         
        
         /***** THE BUILDER PATTERN *******************/
