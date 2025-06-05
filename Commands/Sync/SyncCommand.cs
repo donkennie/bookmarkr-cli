@@ -1,5 +1,6 @@
 
 using System.CommandLine;
+using bookmarkr.ServiceAgents.BookmarkrSyncrServiceAgent;
 using bookmarkr.Services;
 using Serilog;
 

@@ -9,6 +9,7 @@ using bookmarkr.Commands;
 using bookmarkr.Services;
 using Microsoft.Extensions.DependencyInjection;
 using bookmarkr.ServiceAgents;
+using bookmarkr.ServiceAgents.BookmarkrSyncrServiceAgent;
 
 
 namespace bookmarkr;
@@ -59,7 +60,7 @@ class Program
             {
                 // Register your services here
                 services.AddSingleton<IBookmarkService, BookmarkService>();
-                services.AddScoped<IBookmarkrSyncrServiceAgent, BookmarkrSyncrServiceAgent>();
+                services.AddScoped<IBookmarkrSyncrServiceAgent, BookmarkrSyncrServiceAgentService>();
 
                 services.AddHttpClient("bookmarkrSyncr", client =>
                 {
